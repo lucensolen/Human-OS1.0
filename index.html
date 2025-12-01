@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lucen Core Hub – Oscillation Engine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grain"></div>
+
+  <main class="core-shell">
+    <header class="core-header">
+      <div class="brand">
+        <h1>Lucen Core Hub</h1>
+        <p>Oscillation Engine • Ground / Flight • Generation / Evolution</p>
+      </div>
+      <div class="date-pill" id="osc-date"></div>
+    </header>
+
+    <section class="core-grid">
+      <!-- LEFT COLUMN: FEEL ENGINE + CHARGE + MODULE ROUTER -->
+      <div class="core-column core-column-left">
+
+        <!-- FEEL STATE PANEL -->
+        <section class="osc-panel core-panel">
+          <div class="panel-header">
+            <h2>
+              FEEL STATE (Internal Engine)
+              <span class="info-toggle" onclick="toggleInfo('feel-info')">?</span>
+            </h2>
+            <p>Log where you are inside — not what you did.</p>
+            <div id="feel-info" class="info-box hidden">
+              <strong>FEEL = Internal State.</strong><br><br>
+              Use this when your inner position changes:
+              rising into Flight, dropping into Ground, resetting to Center,
+              gaining charge, feeling tension, clarity, fatigue, or a “snap”.<br><br>
+              No actions here. Only your internal weather.
+            </div>
+          </div>
+
+          <div class="core-layout">
+            <div class="dial-column">
+              <div class="dial-label dial-label-top">FLIGHT</div>
+              <div class="dial-wrapper">
+                <input
+                  type="range"
+                  id="osc-pole-slider"
+                  min="-100"
+                  max="100"
+                  step="10"
+                  value="0"
+                  class="vertical-slider"
+                />
+                <div class="dial-center-mark"></div>
+              </div>
+              <div class="dial-label dial-label-bottom">GROUND</div>
+            </div>
+
+            <div class="core-controls">
+              <div class="state-row">
+                <div class="state-pill" id="osc-current-pole-pill">No state set</div>
+                <div class="state-intensity">
+                  <span>Intensity:</span>
+                  <span id="osc-intensity-label">0%</span>
+                </div>
+              </div>
+
+              <label class="field-label" for="osc-energy-rating">
+                How charged do you feel?
+              </label>
+              <div class="energy-row">
+                <input
+                  type="range"
+                  id="osc-energy-rating"
+                  min="1"
+                  max="5"
+                  step="1"
+                  value="3"
+                />
+                <div id="osc-energy-text" class="energy-text">Neutral</div>
+              </div>
+
+              <label class="field-label" for="osc-note">
+                Optional short note about your internal state
+              </label>
+              <textarea
+                id="osc-note"
+                rows="2"
+                placeholder="Example: Rising into Flight, mentally clear but physically tired."
+              ></textarea>
+
+              <button id="osc-set-state-btn" class="primary-btn">
+                Log Current State
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- CHARGE CYCLE + MODULE ROUTER -->
+        <section class="osc-panel">
+          <div class="panel-header">
+            <h2>
+              CHARGE CYCLE & ROUTING
+              <span class="info-toggle" onclick="toggleInfo('charge-info')">?</span>
+            </h2>
+            <p>Generation ↔ Evolution • Which engines this log feeds.</p>
+            <div id="charge-info" class="info-box hidden">
+              <strong>Horizontal = Generation ↔ Evolution.</strong><br><br>
+              Generation = good tired, loading the elastic band with purpose.<br>
+              Evolution = charged, clean release of that stored work.<br><br>
+              Use the module buttons to tag which engines this moment belongs to.
+              One log can feed multiple engines.
+            </div>
+          </div>
+
+          <div class="charge-row">
+            <span class="charge-label">Generation</span>
+            <input
+              type="range"
+              id="osc-charge-slider"
+              min="-100"
+              max="100"
+              step="10"
+              value="0"
+            />
+            <span class="charge-label">Evolution</span>
+          </div>
+          <div class="charge-meta">
+            <span id="osc-charge-text">Balanced • Band resting</span>
+          </div>
+
+          <div class="modules-label-row">
+            <span>Send this log to engines:</span>
+            <span class="modules-hint">(tap to toggle)</span>
+          </div>
+
+          <div class="modules-grid" id="osc-modules-grid">
+            <button class="module-chip active" data-module="core">Core / Work</button>
+            <button class="module-chip" data-module="farm">Farm / Physical</button>
+            <button class="module-chip" data-module="gymit">GymIt / Training</button>
+            <button class="module-chip" data-module="diet">DietDiary / Fuel</button>
+            <button class="module-chip" data-module="mind">MindSetFree / Mental</button>
+            <button class="module-chip" data-module="health">HealthGenie / Recovery</button>
+            <button class="module-chip" data-module="people">PeoplePulse / Social</button>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- CENTER COLUMN: ACTION LOG + TODAY LOG -->
+      <div class="core-column core-column-center">
+
+        <!-- ACTION LOG PANEL -->
+        <section class="osc-panel field-panel">
+          <div class="panel-header">
+            <h2>
+              ACTION LOG (External Moves)
+              <span class="info-toggle" onclick="toggleInfo('action-info')">?</span>
+            </h2>
+            <p>Record what you actually did in the real world.</p>
+            <div id="action-info" class="info-box hidden">
+              <strong>ACTION = External Movement.</strong><br><br>
+              Use this to log physical or creative actions:
+              hauling water, fixing wiring, designing UI, planning, writing, building.<br><br>
+              No feelings here. Only actual movement — the fuel for your oscillation engine.
+            </div>
+          </div>
+
+          <div class="field-layout">
+            <div class="field-column">
+              <h3>GROUND Actions</h3>
+              <p class="column-sub">Body, reality, survival, friction.</p>
+              <textarea
+                id="osc-ground-input"
+                rows="3"
+                placeholder="Example: Hauled water in cold, fixed caravan wiring."
+              ></textarea>
+              <button id="osc-add-ground-btn" class="ghost-btn">
+                Log Ground Action
+              </button>
+              <ul id="osc-ground-list" class="entry-list"></ul>
+            </div>
+
+            <div class="field-column">
+              <h3>FLIGHT Actions</h3>
+              <p class="column-sub">Creation, precision, refinement, design.</p>
+              <textarea
+                id="osc-flight-input"
+                rows="3"
+                placeholder="Example: Refined OS UI, sketched build, planned narrative."
+              ></textarea>
+              <button id="osc-add-flight-btn" class="ghost-btn">
+                Log Flight Action
+              </button>
+              <ul id="osc-flight-list" class="entry-list"></ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- TODAY'S STATE LOG -->
+        <section class="osc-panel">
+          <div class="panel-header">
+            <h2>Today’s FEEL Log</h2>
+            <p>Inner states logged today.</p>
+          </div>
+          <ul id="osc-today-log" class="state-log-list"></ul>
+        </section>
+
+      </div>
+
+      <!-- RIGHT COLUMN: HISTORY, REFLECTION, CORE DIAL, EXPORT -->
+      <div class="core-column core-column-right">
+
+        <!-- HISTORY SUMMARY -->
+        <section class="osc-panel">
+          <div class="panel-header">
+            <h2>7-Day Ground / Flight Balance</h2>
+            <p>Last week’s distribution.</p>
+          </div>
+          <div id="osc-history-summary"></div>
+        </section>
+
+        <!-- MOMENTUM & REFLECTION -->
+        <section class="osc-panel">
+          <div class="panel-header">
+            <h2>Momentum & Reflection</h2>
+            <p>How your engine is moving.</p>
+          </div>
+          <div class="meta-row">
+            <div class="meta-block">
+              <span class="meta-label">Momentum Phase</span>
+              <span class="meta-value" id="osc-momentum-phase">Seeding</span>
+            </div>
+            <div class="meta-block">
+              <span class="meta-label">Oscillation Frequency</span>
+              <span class="meta-value" id="osc-frequency-label">Low (warming up)</span>
+            </div>
+          </div>
+          <p id="osc-engine-reflection" class="reflection-text">
+            Log at least 3 states to unlock pattern reflections.
+          </p>
+          <button id="osc-reset-btn" class="danger-btn">
+            Reset All Data
+          </button>
+        </section>
+
+        <!-- CORE MODULE DIAL -->
+        <section class="osc-panel">
+          <div class="panel-header">
+            <h2>Core Dial – Engine Overview</h2>
+            <p>Each engine’s recent charge.</p>
+          </div>
+          <div class="dial-outer">
+            <div class="dial-circle">
+              <div class="dial-center">Core</div>
+              <div class="dial-orbit" id="osc-dial-orbit">
+                <!-- module orbs inserted by JS -->
+              </div>
+            </div>
+            <ul class="dial-legend" id="osc-dial-legend">
+              <!-- legend rows inserted by JS -->
+            </ul>
+          </div>
+        </section>
+
+        <!-- EXPORT PANEL -->
+        <section class="osc-panel export-panel">
+          <div class="panel-header">
+            <h2>Export Logs</h2>
+            <p>Save all logs as a backup to your device.</p>
+          </div>
+          <button class="primary-btn" onclick="exportOscillationLogs()">
+            Download Logs
+          </button>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+            </html>
